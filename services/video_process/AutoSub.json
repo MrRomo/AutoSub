@@ -1,0 +1,827 @@
+{
+    "jobName": "AutoSub",
+    "accountId": "264179494484",
+    "results": {
+        "transcripts": [
+            {
+                "transcript": "Nirvana es una de las bandas más populares de todos los tiempos. Mucho misterio se encuentra tras estaban, pero también una gran historia con un desenlace amar a compañeros para hablar de algunas cosas que probablemente no sabías sobre Nirvana Comencemos Cort Donald Cobain nació en mil novecientos sesenta y siete en Aberdeen Washington, hijo de una mesera y un mecánico Cort, según sus familiares, creció como un niño."
+            }
+        ],
+        "items": [
+            {
+                "start_time": "0.44",
+                "end_time": "1.12",
+                "alternatives": [
+                    {
+                        "confidence": "0.848",
+                        "content": "Nirvana"
+                    }
+                ],
+                "type": "pronunciation"
+            },
+            {
+                "start_time": "1.13",
+                "end_time": "1.34",
+                "alternatives": [
+                    {
+                        "confidence": "0.9505",
+                        "content": "es"
+                    }
+                ],
+                "type": "pronunciation"
+            },
+            {
+                "start_time": "1.34",
+                "end_time": "1.51",
+                "alternatives": [
+                    {
+                        "confidence": "1.0",
+                        "content": "una"
+                    }
+                ],
+                "type": "pronunciation"
+            },
+            {
+                "start_time": "1.51",
+                "end_time": "1.6",
+                "alternatives": [
+                    {
+                        "confidence": "1.0",
+                        "content": "de"
+                    }
+                ],
+                "type": "pronunciation"
+            },
+            {
+                "start_time": "1.6",
+                "end_time": "1.75",
+                "alternatives": [
+                    {
+                        "confidence": "1.0",
+                        "content": "las"
+                    }
+                ],
+                "type": "pronunciation"
+            },
+            {
+                "start_time": "1.75",
+                "end_time": "2.06",
+                "alternatives": [
+                    {
+                        "confidence": "1.0",
+                        "content": "bandas"
+                    }
+                ],
+                "type": "pronunciation"
+            },
+            {
+                "start_time": "2.06",
+                "end_time": "2.26",
+                "alternatives": [
+                    {
+                        "confidence": "0.9997",
+                        "content": "más"
+                    }
+                ],
+                "type": "pronunciation"
+            },
+            {
+                "start_time": "2.26",
+                "end_time": "2.74",
+                "alternatives": [
+                    {
+                        "confidence": "1.0",
+                        "content": "populares"
+                    }
+                ],
+                "type": "pronunciation"
+            },
+            {
+                "start_time": "2.74",
+                "end_time": "2.84",
+                "alternatives": [
+                    {
+                        "confidence": "1.0",
+                        "content": "de"
+                    }
+                ],
+                "type": "pronunciation"
+            },
+            {
+                "start_time": "2.84",
+                "end_time": "3.13",
+                "alternatives": [
+                    {
+                        "confidence": "1.0",
+                        "content": "todos"
+                    }
+                ],
+                "type": "pronunciation"
+            },
+            {
+                "start_time": "3.13",
+                "end_time": "3.28",
+                "alternatives": [
+                    {
+                        "confidence": "1.0",
+                        "content": "los"
+                    }
+                ],
+                "type": "pronunciation"
+            },
+            {
+                "start_time": "3.28",
+                "end_time": "3.64",
+                "alternatives": [
+                    {
+                        "confidence": "1.0",
+                        "content": "tiempos"
+                    }
+                ],
+                "type": "pronunciation"
+            },
+            {
+                "alternatives": [
+                    {
+                        "confidence": "0.0",
+                        "content": "."
+                    }
+                ],
+                "type": "punctuation"
+            },
+            {
+                "start_time": "3.67",
+                "end_time": "4.2",
+                "alternatives": [
+                    {
+                        "confidence": "0.9301",
+                        "content": "Mucho"
+                    }
+                ],
+                "type": "pronunciation"
+            },
+            {
+                "start_time": "4.2",
+                "end_time": "4.72",
+                "alternatives": [
+                    {
+                        "confidence": "0.999",
+                        "content": "misterio"
+                    }
+                ],
+                "type": "pronunciation"
+            },
+            {
+                "start_time": "4.75",
+                "end_time": "4.93",
+                "alternatives": [
+                    {
+                        "confidence": "0.9762",
+                        "content": "se"
+                    }
+                ],
+                "type": "pronunciation"
+            },
+            {
+                "start_time": "4.93",
+                "end_time": "5.36",
+                "alternatives": [
+                    {
+                        "confidence": "0.9382",
+                        "content": "encuentra"
+                    }
+                ],
+                "type": "pronunciation"
+            },
+            {
+                "start_time": "5.36",
+                "end_time": "5.62",
+                "alternatives": [
+                    {
+                        "confidence": "0.6021",
+                        "content": "tras"
+                    }
+                ],
+                "type": "pronunciation"
+            },
+            {
+                "start_time": "5.62",
+                "end_time": "6.25",
+                "alternatives": [
+                    {
+                        "confidence": "0.899",
+                        "content": "estaban"
+                    }
+                ],
+                "type": "pronunciation"
+            },
+            {
+                "alternatives": [
+                    {
+                        "confidence": "0.0",
+                        "content": ","
+                    }
+                ],
+                "type": "punctuation"
+            },
+            {
+                "start_time": "6.26",
+                "end_time": "6.5",
+                "alternatives": [
+                    {
+                        "confidence": "0.9923",
+                        "content": "pero"
+                    }
+                ],
+                "type": "pronunciation"
+            },
+            {
+                "start_time": "6.5",
+                "end_time": "7.01",
+                "alternatives": [
+                    {
+                        "confidence": "0.995",
+                        "content": "también"
+                    }
+                ],
+                "type": "pronunciation"
+            },
+            {
+                "start_time": "7.02",
+                "end_time": "7.28",
+                "alternatives": [
+                    {
+                        "confidence": "1.0",
+                        "content": "una"
+                    }
+                ],
+                "type": "pronunciation"
+            },
+            {
+                "start_time": "7.28",
+                "end_time": "7.52",
+                "alternatives": [
+                    {
+                        "confidence": "1.0",
+                        "content": "gran"
+                    }
+                ],
+                "type": "pronunciation"
+            },
+            {
+                "start_time": "7.52",
+                "end_time": "8.06",
+                "alternatives": [
+                    {
+                        "confidence": "0.9976",
+                        "content": "historia"
+                    }
+                ],
+                "type": "pronunciation"
+            },
+            {
+                "start_time": "8.09",
+                "end_time": "8.31",
+                "alternatives": [
+                    {
+                        "confidence": "0.9597",
+                        "content": "con"
+                    }
+                ],
+                "type": "pronunciation"
+            },
+            {
+                "start_time": "8.31",
+                "end_time": "8.41",
+                "alternatives": [
+                    {
+                        "confidence": "0.9996",
+                        "content": "un"
+                    }
+                ],
+                "type": "pronunciation"
+            },
+            {
+                "start_time": "8.41",
+                "end_time": "8.97",
+                "alternatives": [
+                    {
+                        "confidence": "1.0",
+                        "content": "desenlace"
+                    }
+                ],
+                "type": "pronunciation"
+            },
+            {
+                "start_time": "8.97",
+                "end_time": "9.27",
+                "alternatives": [
+                    {
+                        "confidence": "0.2326",
+                        "content": "amar"
+                    }
+                ],
+                "type": "pronunciation"
+            },
+            {
+                "start_time": "9.3",
+                "end_time": "9.72",
+                "alternatives": [
+                    {
+                        "confidence": "0.949",
+                        "content": "a"
+                    }
+                ],
+                "type": "pronunciation"
+            },
+            {
+                "start_time": "9.72",
+                "end_time": "10.27",
+                "alternatives": [
+                    {
+                        "confidence": "0.9949",
+                        "content": "compañeros"
+                    }
+                ],
+                "type": "pronunciation"
+            },
+            {
+                "start_time": "10.27",
+                "end_time": "10.43",
+                "alternatives": [
+                    {
+                        "confidence": "0.9807",
+                        "content": "para"
+                    }
+                ],
+                "type": "pronunciation"
+            },
+            {
+                "start_time": "10.43",
+                "end_time": "10.83",
+                "alternatives": [
+                    {
+                        "confidence": "1.0",
+                        "content": "hablar"
+                    }
+                ],
+                "type": "pronunciation"
+            },
+            {
+                "start_time": "10.86",
+                "end_time": "10.97",
+                "alternatives": [
+                    {
+                        "confidence": "0.9994",
+                        "content": "de"
+                    }
+                ],
+                "type": "pronunciation"
+            },
+            {
+                "start_time": "10.97",
+                "end_time": "11.33",
+                "alternatives": [
+                    {
+                        "confidence": "1.0",
+                        "content": "algunas"
+                    }
+                ],
+                "type": "pronunciation"
+            },
+            {
+                "start_time": "11.33",
+                "end_time": "11.62",
+                "alternatives": [
+                    {
+                        "confidence": "1.0",
+                        "content": "cosas"
+                    }
+                ],
+                "type": "pronunciation"
+            },
+            {
+                "start_time": "11.62",
+                "end_time": "11.75",
+                "alternatives": [
+                    {
+                        "confidence": "1.0",
+                        "content": "que"
+                    }
+                ],
+                "type": "pronunciation"
+            },
+            {
+                "start_time": "11.75",
+                "end_time": "12.45",
+                "alternatives": [
+                    {
+                        "confidence": "1.0",
+                        "content": "probablemente"
+                    }
+                ],
+                "type": "pronunciation"
+            },
+            {
+                "start_time": "12.45",
+                "end_time": "12.61",
+                "alternatives": [
+                    {
+                        "confidence": "0.9793",
+                        "content": "no"
+                    }
+                ],
+                "type": "pronunciation"
+            },
+            {
+                "start_time": "12.61",
+                "end_time": "13.15",
+                "alternatives": [
+                    {
+                        "confidence": "0.9746",
+                        "content": "sabías"
+                    }
+                ],
+                "type": "pronunciation"
+            },
+            {
+                "start_time": "13.18",
+                "end_time": "13.57",
+                "alternatives": [
+                    {
+                        "confidence": "0.9497",
+                        "content": "sobre"
+                    }
+                ],
+                "type": "pronunciation"
+            },
+            {
+                "start_time": "13.57",
+                "end_time": "14.05",
+                "alternatives": [
+                    {
+                        "confidence": "0.3339",
+                        "content": "Nirvana"
+                    }
+                ],
+                "type": "pronunciation"
+            },
+            {
+                "start_time": "14.44",
+                "end_time": "15.45",
+                "alternatives": [
+                    {
+                        "confidence": "0.8125",
+                        "content": "Comencemos"
+                    }
+                ],
+                "type": "pronunciation"
+            },
+            {
+                "start_time": "16.94",
+                "end_time": "17.35",
+                "alternatives": [
+                    {
+                        "confidence": "0.7767",
+                        "content": "Cort"
+                    }
+                ],
+                "type": "pronunciation"
+            },
+            {
+                "start_time": "17.38",
+                "end_time": "17.74",
+                "alternatives": [
+                    {
+                        "confidence": "0.9099",
+                        "content": "Donald"
+                    }
+                ],
+                "type": "pronunciation"
+            },
+            {
+                "start_time": "17.74",
+                "end_time": "18.14",
+                "alternatives": [
+                    {
+                        "confidence": "0.9791",
+                        "content": "Cobain"
+                    }
+                ],
+                "type": "pronunciation"
+            },
+            {
+                "start_time": "18.17",
+                "end_time": "18.61",
+                "alternatives": [
+                    {
+                        "confidence": "0.9819",
+                        "content": "nació"
+                    }
+                ],
+                "type": "pronunciation"
+            },
+            {
+                "start_time": "18.61",
+                "end_time": "18.7",
+                "alternatives": [
+                    {
+                        "confidence": "1.0",
+                        "content": "en"
+                    }
+                ],
+                "type": "pronunciation"
+            },
+            {
+                "start_time": "18.7",
+                "end_time": "18.86",
+                "alternatives": [
+                    {
+                        "confidence": "1.0",
+                        "content": "mil"
+                    }
+                ],
+                "type": "pronunciation"
+            },
+            {
+                "start_time": "18.86",
+                "end_time": "19.33",
+                "alternatives": [
+                    {
+                        "confidence": "1.0",
+                        "content": "novecientos"
+                    }
+                ],
+                "type": "pronunciation"
+            },
+            {
+                "start_time": "19.33",
+                "end_time": "19.68",
+                "alternatives": [
+                    {
+                        "confidence": "1.0",
+                        "content": "sesenta"
+                    }
+                ],
+                "type": "pronunciation"
+            },
+            {
+                "start_time": "19.68",
+                "end_time": "19.72",
+                "alternatives": [
+                    {
+                        "confidence": "1.0",
+                        "content": "y"
+                    }
+                ],
+                "type": "pronunciation"
+            },
+            {
+                "start_time": "19.72",
+                "end_time": "20.16",
+                "alternatives": [
+                    {
+                        "confidence": "1.0",
+                        "content": "siete"
+                    }
+                ],
+                "type": "pronunciation"
+            },
+            {
+                "start_time": "20.19",
+                "end_time": "20.41",
+                "alternatives": [
+                    {
+                        "confidence": "0.9777",
+                        "content": "en"
+                    }
+                ],
+                "type": "pronunciation"
+            },
+            {
+                "start_time": "20.41",
+                "end_time": "20.78",
+                "alternatives": [
+                    {
+                        "confidence": "1.0",
+                        "content": "Aberdeen"
+                    }
+                ],
+                "type": "pronunciation"
+            },
+            {
+                "start_time": "20.78",
+                "end_time": "21.3",
+                "alternatives": [
+                    {
+                        "confidence": "1.0",
+                        "content": "Washington"
+                    }
+                ],
+                "type": "pronunciation"
+            },
+            {
+                "alternatives": [
+                    {
+                        "confidence": "0.0",
+                        "content": ","
+                    }
+                ],
+                "type": "punctuation"
+            },
+            {
+                "start_time": "21.31",
+                "end_time": "21.58",
+                "alternatives": [
+                    {
+                        "confidence": "0.5104",
+                        "content": "hijo"
+                    }
+                ],
+                "type": "pronunciation"
+            },
+            {
+                "start_time": "21.58",
+                "end_time": "21.68",
+                "alternatives": [
+                    {
+                        "confidence": "0.9898",
+                        "content": "de"
+                    }
+                ],
+                "type": "pronunciation"
+            },
+            {
+                "start_time": "21.68",
+                "end_time": "21.86",
+                "alternatives": [
+                    {
+                        "confidence": "0.9981",
+                        "content": "una"
+                    }
+                ],
+                "type": "pronunciation"
+            },
+            {
+                "start_time": "21.86",
+                "end_time": "22.34",
+                "alternatives": [
+                    {
+                        "confidence": "0.9942",
+                        "content": "mesera"
+                    }
+                ],
+                "type": "pronunciation"
+            },
+            {
+                "start_time": "22.37",
+                "end_time": "22.53",
+                "alternatives": [
+                    {
+                        "confidence": "0.9645",
+                        "content": "y"
+                    }
+                ],
+                "type": "pronunciation"
+            },
+            {
+                "start_time": "22.53",
+                "end_time": "22.62",
+                "alternatives": [
+                    {
+                        "confidence": "0.9926",
+                        "content": "un"
+                    }
+                ],
+                "type": "pronunciation"
+            },
+            {
+                "start_time": "22.62",
+                "end_time": "23.16",
+                "alternatives": [
+                    {
+                        "confidence": "0.9561",
+                        "content": "mecánico"
+                    }
+                ],
+                "type": "pronunciation"
+            },
+            {
+                "start_time": "23.17",
+                "end_time": "23.47",
+                "alternatives": [
+                    {
+                        "confidence": "0.2202",
+                        "content": "Cort"
+                    }
+                ],
+                "type": "pronunciation"
+            },
+            {
+                "alternatives": [
+                    {
+                        "confidence": "0.0",
+                        "content": ","
+                    }
+                ],
+                "type": "punctuation"
+            },
+            {
+                "start_time": "23.5",
+                "end_time": "23.89",
+                "alternatives": [
+                    {
+                        "confidence": "0.8045",
+                        "content": "según"
+                    }
+                ],
+                "type": "pronunciation"
+            },
+            {
+                "start_time": "23.89",
+                "end_time": "24.05",
+                "alternatives": [
+                    {
+                        "confidence": "1.0",
+                        "content": "sus"
+                    }
+                ],
+                "type": "pronunciation"
+            },
+            {
+                "start_time": "24.05",
+                "end_time": "24.6",
+                "alternatives": [
+                    {
+                        "confidence": "1.0",
+                        "content": "familiares"
+                    }
+                ],
+                "type": "pronunciation"
+            },
+            {
+                "alternatives": [
+                    {
+                        "confidence": "0.0",
+                        "content": ","
+                    }
+                ],
+                "type": "punctuation"
+            },
+            {
+                "start_time": "24.63",
+                "end_time": "25.0",
+                "alternatives": [
+                    {
+                        "confidence": "0.9667",
+                        "content": "creció"
+                    }
+                ],
+                "type": "pronunciation"
+            },
+            {
+                "start_time": "25.0",
+                "end_time": "25.17",
+                "alternatives": [
+                    {
+                        "confidence": "0.994",
+                        "content": "como"
+                    }
+                ],
+                "type": "pronunciation"
+            },
+            {
+                "start_time": "25.17",
+                "end_time": "25.24",
+                "alternatives": [
+                    {
+                        "confidence": "0.9453",
+                        "content": "un"
+                    }
+                ],
+                "type": "pronunciation"
+            },
+            {
+                "start_time": "25.24",
+                "end_time": "25.41",
+                "alternatives": [
+                    {
+                        "confidence": "0.9935",
+                        "content": "niño"
+                    }
+                ],
+                "type": "pronunciation"
+            },
+            {
+                "alternatives": [
+                    {
+                        "confidence": "0.0",
+                        "content": "."
+                    }
+                ],
+                "type": "punctuation"
+            }
+        ]
+    },
+    "status": "COMPLETED"
+}
