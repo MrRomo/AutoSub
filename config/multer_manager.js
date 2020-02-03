@@ -7,6 +7,8 @@ const fileFilter = (req, file, cb) => {
         error.code = "INCORRECT_FILETYPE";
         return cb(error, false)
     }
+    console.log("correct video¡");
+    
     cb(null, true);
 }
 

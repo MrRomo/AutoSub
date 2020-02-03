@@ -1,8 +1,8 @@
 const router = require('express').Router()
-const media = require('../controllers/media')
+const job = require('../controllers/job')
 
 
-router.post('/upload', multerUploader.single('file'), media.processVideo);
+router.post('/upload', multerUploader.single('file'), job.processVideo);
 
 
 module.exports = router
