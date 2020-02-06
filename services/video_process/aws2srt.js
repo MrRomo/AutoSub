@@ -4,7 +4,7 @@ const fs = require('fs');
 
 
 const read = async () => {
-    let rawdata = fs.readFileSync('../transcript/AutoSub4.json');
+    let rawdata = fs.readFileSync('../transcript/AutoSub5.json');
     let sub = JSON.parse(rawdata);
     const srt = srtConvert(sub)
 

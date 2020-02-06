@@ -4,13 +4,15 @@ const fs = require('fs-extra')
 const readFile = promisify(fs.readFile)
 
 
-utils.prepareFile = async (path) => {
+utils.prepareFile = async (req) => {
+    const { path } = req.file
     const data = await utils.readFile(path)
     await utils.deleteFile(path)
+    const filePath = `AutoSub/${req.user.id}`
     return {
         data,
         params: {
-            path,
+            path: filePath,
             result: null,
             database: null,
             error: null
