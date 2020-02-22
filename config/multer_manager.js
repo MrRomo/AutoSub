@@ -1,6 +1,9 @@
 const multer = require("multer");
 
 const fileFilter = (req, file, cb) => {
+    console.log('File upload');
+    console.log(file);
+    
     const allowedTypes = ["video/mp4", "video/x-msvideo", "video/quicktime"];
     if (!allowedTypes.includes(file.mimetype)) {
         const error = new Error("Incorrect file");

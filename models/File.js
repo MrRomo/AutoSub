@@ -1,9 +1,10 @@
 const { Schema, model } = require('mongoose')
 
 const FileSchema = new Schema({
-    userId: { type: String, unique: true, required: true },
-    bucket: { type: String, required: true },
-    key: { type: String, required: true },
+    userId: { type: String, required: true },
+    jobId: { type: String, required: true },
+    Key: { type: String, required: true },
+    Bucket: { type: String, required: true },
     filename: { type: String, required: true },
     ext: { type: String, required: true },
     size: { type: Number, required: true },

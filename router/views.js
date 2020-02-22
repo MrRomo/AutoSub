@@ -7,7 +7,7 @@ var router = express.Router();
 router.get('/', (req, res) => {
     const { user } = req
     console.log(user);    
-    res.render('index', { title: 'Amigo Secreto Online', user});
+    res.render('index', { title: 'AutoSub', user});
 })
 
 

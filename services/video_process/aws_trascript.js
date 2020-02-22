@@ -1,7 +1,7 @@
 require('dotenv').config()
 const aws = require('aws-sdk');
 aws.config.update({
-    region: process.env.AWS_REGION,
+    region: process.env.REGION,
     accessKeyId: process.env.AWS_ACCESS_KEY,
     secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
     ACL: process.env.ACL

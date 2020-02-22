@@ -49,6 +49,8 @@ class mongo_db {
         }
     }
     async create(object, Schema) {
+        console.log('saving object', object);
+        
         try {
             let data = new Schema(object)
             const saveData = await data.save()

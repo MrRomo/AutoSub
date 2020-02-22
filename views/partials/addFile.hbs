@@ -1,6 +1,41 @@
-<form action="/api/upload" method="POST" >
+<form action="/api/upload" method="POST" enctype="multipart/form-data">
   <div class="form-group">
-    <label for="exampleFormControlFile1">Example file input</label>
-    <input type="file" class="form-control-file" id="exampleFormControlFile1">
+    <label for="exampleFormControlFile1">Sube un archivo:</label>
+    <input type="file" class="form-control-file" accept="video/mp4" name="file" >
+  </div>
+  <div class="form-group">
+	<button type="submit" class="btn btn-success">Subir</button>
   </div>
 </form>
+
+<script>
+  $(document).on('change','input[type="file"]',function(){
+	// this.files[0].size recupera el tamaño del archivo
+	// alert(this.files[0].size);
+	
+	var fileName = this.files[0].name;
+	var fileSize = this.files[0].size;
+
+	if(fileSize > 100000000){
+		alert('El archivo no debe superar los 100MB');
+		this.value = '';
+		this.files[0].name = '';
+	}else{
+		// recuperamos la extensión del archivo
+		var ext = fileName.split('.').pop();
+		
+		// Convertimos en minúscula porque 
+		// la extensión del archivo puede estar en mayúscula
+		ext = ext.toLowerCase();
+    
+		// console.log(ext);
+		switch (ext) {
+			case 'mp4': break;
+			default:
+				alert('El archivo no tiene la extensión adecuada');
+				this.value = ''; // reset del valor
+				this.files[0].name = '';
+		}
+	}
+});
+</script>
