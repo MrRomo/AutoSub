@@ -6,8 +6,7 @@ var router = express.Router();
 /* GET home page. */
 router.get('/', (req, res) => {
     const { user } = req
-    console.log(user);
-    
+    console.log(user);    
     res.render('index', { title: 'Amigo Secreto Online', user});
 })
 

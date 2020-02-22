@@ -6,7 +6,7 @@ const { startJob, getJob } = require('../services/video_process/aws_trascript')
 
 crtl.processVideo = async (req, res) => {
     console.log('Processing video¡¡');
-    req.user = require('../mocks/user')
+    const { user } = req
     const { path } = req.file
     const { params, data } = await prepareFile(req)
 
