@@ -2,6 +2,9 @@ const srtConvert = require('aws-transcription-to-srt')
 
 const fs = require('fs');
 
+const subtitules = {}
+
+
 
 const read = async () => {
     let rawdata = fs.readFileSync('../transcript/AutoSub5.json');
@@ -17,3 +20,5 @@ const read = async () => {
 }
 
 read()
+
+

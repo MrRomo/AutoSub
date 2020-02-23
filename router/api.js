@@ -7,7 +7,7 @@ const {job} = require('../controllers')
 const { isLoggedIn, isNotLoggedIn } = require('../lib/auth')
 
     /* GET home page. */
-router.post('/upload', multerUploader.single('file'), job.processVideo)
+router.post('/upload', isLoggedIn, multerUploader.single('file'), job.processVideo)
 router.get('/jobs', isLoggedIn, job.getJobs)
 
 module.exports = router;

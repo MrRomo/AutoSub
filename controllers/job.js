@@ -2,9 +2,10 @@ const crtl = {}
 const { prepareFile } = require('../utils/files')
 const uploader_s3 = require('../services/uploader').uploader_s3
 const uploader = new uploader_s3(process.env)
-const { startJob, getJob } = require('../services/video_process/aws_trascript')
+const { startJob, getJob, aws2str } = require('../services/video_process/aws_trascript')
 const jobsUtils = require('../utils/job')
-const { User, Job } = require('../models')
+const { User, Job, File } = require('../models')
+const fs = require('fs');
 
 crtl.processVideo = async (req, res) => {
     console.log('Processing video¡¡');
@@ -17,11 +18,9 @@ crtl.processVideo = async (req, res) => {
 
         const { database } = await uploader.upload(data, params, false)
         const { Key, filename } = database
-        const jobName = filename.split('.')[0]
+        await startJob(Key, database.jobName)
 
-        await startJob(Key, jobName)
-
-        const result = await jobsUtils.save(req.user, database, jobName, name)
+        const result = await jobsUtils.save(req.user, database, name)
 
     } catch (error) {
         console.log(error)
@@ -37,11 +36,35 @@ crtl.getJobs = async (req, res) => {
 
     const { data } = jobs
 
+
     data.forEach(async job => {
-        const result = await getJob(job.jobName)
-        const { TranscriptionJobStatus } = result.TranscriptionJob
-        const query = { query: { 'jobName': job.jobName }, options: { 'status': TranscriptionJobStatus, 'isCompleted': true } }
-        if (TranscriptionJobStatus != job.status) db.update(query, Job)
+        const { Bucket } = process.env
+
+        if (!job.isCompleted) {
+            const result = await getJob(job.jobName)
+            const { TranscriptionJobStatus } = result.TranscriptionJob
+            if (TranscriptionJobStatus != job.status) {
+                var params = {
+                    Bucket, /* Another bucket working fine */
+                    CopySource: `${Bucket}/${job.jobName}.json`, /* required */
+                    Key: `AutoSub/${job.userId}/${job.jobName}/${job.jobName}.json`, /* required */
+                    ACL: 'public-read',
+                }
+                // await db.create(fileJson, File)
+                await uploader.move(params)
+                await aws2str(job)
+                const query = {
+                    query: { 'jobName': job.jobName },
+                    options: {
+                        'status': TranscriptionJobStatus,
+                        'isCompleted': true,
+                        'Bucket': Bucket,
+                        'Key': `AutoSub/${job.userId}/${job.jobName}/${job.jobName}.srt`
+                    }
+                }
+                await db.update(query, Job)
+            }
+        }
     });
 
     console.log(jobs);

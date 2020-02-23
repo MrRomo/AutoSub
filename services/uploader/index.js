@@ -25,16 +25,18 @@ class uploader_s3 {
     async convert(data, format) {
         return await sharp(data).toFormat(format).toBuffer()
     }
-    async prepare(data, { path, format, size }, isPhoto=true) {
+    async prepare(data, { path, format, size }, isPhoto = true) {
         if (isPhoto) {
             data = await this.crop(data, size)
             data = await this.convert(data, format)
         }
         const uploadParams = this.uploadParams
         const database = {}
-        const filename = uuid() + '.' + format
+        const jobName = uuid()
+        const filename = jobName + '.' + format
         database.filename = filename
-        uploadParams.Key = database.Key = path + '/' + filename //ruta del archivo
+        database.jobName = jobName
+        uploadParams.Key = database.Key = path + '/' + jobName + '/' + filename //ruta del archivo
         uploadParams.Body = data
         database.Bucket = uploadParams.Bucket
         database.path = path
@@ -62,6 +64,95 @@ class uploader_s3 {
                     } else {
                         result.error = err.message
                         reject(result)
+                    }
+                })
+            })
+            return res
+        } catch (error) {
+            return (error.error) ? error : { error };
+        }
+    }
+    async uploadFile(params) {
+        const result = {}
+        
+        try {
+            const res = await new Promise((resolve, reject) => {
+                this.s3client.upload(params, (err, data) => {
+                    if (err == null) {
+                        result.result = `File uploaded successfully. ${data.Location}`
+                        resolve(result)
+                    } else {
+                        result.error = err.message
+                        reject(result)
+                    }
+                })
+            })
+            return res
+        } catch (error) {
+            return (error.error) ? error : { error };
+        }
+    }
+    async deleteFileS3(params) {
+        const result = {}
+        try {
+            const res = await new Promise((resolve, reject) => {
+                var params = { Bucket: params.Bucket, Key: params.CopySource };
+                this.s3client.deleteObject(params, function (err, data) {
+                    if (err) {
+                        result.error = err.message
+                        console.log(err); // an error occurred
+                        reject(result)
+                    }  // error
+                    else {
+                        result.result = `File deleted successfully. ${data}`
+                        resolve(result)
+                        console.log(data);
+                    }  // deleted
+                });
+            })
+            return res
+
+        } catch (error) {
+            return (error.error) ? error : { error };
+        }
+    }
+    async move(params) {
+        const result = {}
+
+        try {
+            const res = await new Promise((resolve, reject) => {
+                this.s3client.copyObject(params, async function (err, data) {
+                    if (err) {
+                        result.error = err.message
+                        console.log(err); // an error occurred
+                        reject(result)
+                    }
+                    else {
+                        result.result = `File moved successfully. ${data}`
+                        resolve(result)
+                        console.log(data); // successful response
+                    }
+                });
+            })
+            return res
+        } catch (error) {
+            return (error.error) ? error : { error };
+        }
+    }
+    async download({ Bucket, Key }) {
+        const result = {}
+        try {
+            const res = await new Promise((resolve, reject) => {
+                var params = { Bucket, Key };
+                console.log(params);
+
+                this.s3client.getObject(params, async (err, data) => {
+                    if (err) {
+                        result.error = err.message
+                        reject(result)
+                        console.error(err);
+                    } else {
+                        resolve(data)
                     }
                 })
             })

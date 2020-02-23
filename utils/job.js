@@ -4,14 +4,14 @@ const { mongo_db } = require('../database')
 
 
 
-jobs.save = async (user, fileQuery, jobName, name) => {
+jobs.save = async (user, fileQuery, name) => {
 
 
     const { id } = user
     const jobQuery = {
         userId: user.id,
         name,
-        jobName
+        jobName: fileQuery.jobName
     }
 
     console.log('SAVING JOBS', jobQuery);
