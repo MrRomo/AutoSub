@@ -26,7 +26,6 @@ class mongo_db {
     }
 
     async getOne(query, Schema, options) {
-        console.log('Get object', query);
         try {
             let data = await Schema.findById(query)
             return { data }
@@ -37,8 +36,6 @@ class mongo_db {
     async get(query, Schema, options) {
         const { sort } = options || "-1"
         const { limit } = options || 1
-        console.log('Get object', query);
-        
         try {
             let data = await Schema.find(query)
                 .sort(sort)
@@ -49,8 +46,6 @@ class mongo_db {
         }
     }
     async create(object, Schema) {
-        console.log('saving object', object);
-        
         try {
             let data = new Schema(object)
             const saveData = await data.save()

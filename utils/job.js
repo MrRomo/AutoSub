@@ -4,39 +4,44 @@ const { mongo_db } = require('../database')
 
 
 
-jobs.save = async (user, fileQuery, jobname) => {
+jobs.save = async (user, fileQuery, jobName, name) => {
 
-    const databaseService = new mongo_db(process.env)
 
-    console.log('SAVING JOBS');
-    console.log(user, database, jobname);
-    const { id } = req.user
+    const { id } = user
     const jobQuery = {
         userId: user.id,
-        name: jobname
+        name,
+        jobName
     }
 
-    const jobResult = await databaseService.create(jobQuery, Job)
+    console.log('SAVING JOBS', jobQuery);
 
-    console.log(jobResult);
+    const jobResult = await db.create(jobQuery, Job)
 
-    await databaseService.update({ id, $inc: { jobs: 1 } }, User)
+    console.log(jobResult);   
+    
+    const userResult = await db.update({ query: { 'id': id }, options: { $inc: { jobs: 1 } } }, User)
+    
+    console.log(userResult);
 
     const fileVideoQuery = {
         userId: id,
-        jobId: jobResult._id,
+        jobId: jobResult.data._id,
         Key: fileQuery.Key,
         Bucket: fileQuery.Bucket,
         filename: fileQuery.filename,
-        ext,
+        ext: fileQuery.filename.split('.')[1],
         size: fileQuery.size
     }
 
-    const videoFile = await databaseService.create(fileVideoQuery, File)
+    console.log('savingFile', fileVideoQuery);    
+
+    const videoFile = await db.create(fileVideoQuery, File)
+
+    console.log('jobResult of process');
+    console.log(jobResult);
+    console.log(userResult);
     console.log(videoFile);
-
-    // await db.create(query, Job)
-
 
 }
 

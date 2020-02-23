@@ -1,0 +1,76 @@
+{{>navBar}}
+
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">Sube un video</div>
+        </div>
+        <div class="card-body">
+            {{#if user}}
+            {{>addFile}}
+            {{else}}
+            <h2>Inicie sesion para subir un archivo</h2>
+            {{/if}}
+        </div>
+    </div>
+</div>
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">Trabajos previos</div>
+        </div>
+        <div class="card-body" id='jobContainer'>
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+
+    (async function load() {
+        const response = await fetch('/api/jobs')
+        const data = await response.json()
+        console.log(data)
+        const $jobContainer = document.querySelector('#jobContainer');
+        renderJobList(data, $jobContainer,)    
+
+    })()
+
+    function template(job) {
+
+        return (
+            `
+            <div class="card mb-3">
+                <div class="card-header">
+                    <div class="card-title">${job.name}</div>
+                </div>
+                <div class="card-body">
+                    <h4>Codigo del trabajo: ${job.jobName}</h4>
+                </div>
+                <div class="card-footer">
+                    <span>Estdo del Trabajo: ${job.status}</span>
+                    <button class=" ml-4 btn btn-${(job.isCompleted) ? 'success' : 'secondary'}" ${(job.isCompleted) ? '' : 'disabled'}>Descargar</button>
+                </div>
+            </div>
+      `
+        )
+    }
+    function createTemplate(HTMLString) {
+        const html = document.implementation.createHTMLDocument();
+        html.body.innerHTML = HTMLString;
+        return html.body.children[0];
+    }
+
+    function renderJobList(list, $container) {
+        // actionList.data.Jobs
+        //$container.children[0].remove();
+        list.forEach((Job) => {
+            console.log(Job)
+            const HTMLString = template(Job);
+            const JobElement = createTemplate(HTMLString);
+            $container.append(JobElement);
+        })
+    }
+
+</script>

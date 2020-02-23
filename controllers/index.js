@@ -1,4 +1,5 @@
 module.exports = {
-    job : require('./job')
+    job : require('./job'),
+    user : require('./user')
 
 }

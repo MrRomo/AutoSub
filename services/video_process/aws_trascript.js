@@ -10,7 +10,7 @@ const transcribe = {}
 var transcribeservice = new aws.TranscribeService()
 
 transcribe.startJob = async (key, jobName) => {
-
+    console.log('Start transcription');
     const S3 = new aws.S3()
 
     var params = {

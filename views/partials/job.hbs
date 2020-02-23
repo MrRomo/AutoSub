@@ -1,0 +1,16 @@
+<div class="card">
+    <div class="card-header">
+        <div class="card-title">{{name}}</div>
+    </div>
+    <div class="card-body">
+        <h4>Codigo del trabajo: {{jobName}}</h4>
+    </div>
+    <div class="card-footer">
+        <span>Estdo del Trabajo: {{status}}</span>
+        {{#if isCompleted}}
+        <button class="btn btn-success">Descargar</button>
+        {{else}}
+        <button class="btn" disabled>Descargar</button>
+        {{/if}}
+    </div>
+</div>
