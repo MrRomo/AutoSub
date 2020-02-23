@@ -47,8 +47,6 @@ app.engine('.hbs', exphbs({
 app.use('/public', express.static(path.join(__dirname, './public')));
 app.set('view engine', 'hbs');
 
-
-
 // parse application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: false }))
 
@@ -73,8 +71,9 @@ app.use(function (err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+const port =  process.env.PORT || 5000
 
-app.listen(process.env.PORT || 5000, () => {
-  console.log('Server on port: ', process.env.PORT, "http://localhost:", process.env.PORT);
+app.listen(port, () => {
+  console.log('Server on port: ', port, "http://localhost:"+port);
   console.log("Enviroment: ", app.get('env'));
 })
