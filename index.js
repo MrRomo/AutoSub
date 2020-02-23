@@ -51,7 +51,7 @@ app.set('view engine', 'hbs');
 
 // parse application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: false }))
- 
+
 // parse application/json
 app.use(express.json())
 
@@ -59,8 +59,8 @@ app.use('/', viewsRouter);
 app.use('/api', apiRouter);
 
 app.use((req, res, next) => {
-    res.locals.user = req.user || null
-    next();
+  res.locals.user = req.user || null
+  next();
 })
 
 // error handler
@@ -74,9 +74,7 @@ app.use(function (err, req, res, next) {
   res.render('error');
 });
 
-const port = (process.env.PORT || '4000');
-app.set('port', port);
-app.listen(port, () => {
-  console.log('Server on port: ', port, "http://localhost:4000");
+app.listen(process.env.PORT || 5000, () => {
+  console.log('Server on port: ', process.env.PORT, "http://localhost:", process.env.PORT);
   console.log("Enviroment: ", app.get('env'));
 })
