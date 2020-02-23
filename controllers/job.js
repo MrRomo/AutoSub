@@ -62,6 +62,7 @@ crtl.getJobs = async (req, res) => {
                         'Key': `AutoSub/${job.userId}/${job.jobName}/${job.jobName}.srt`
                     }
                 }
+                uploader.deleteFileS3({ Bucket, Key: `${Bucket}/${job.jobName}.json` })
                 await db.update(query, Job)
             }
         }

@@ -96,7 +96,6 @@ class uploader_s3 {
         const result = {}
         try {
             const res = await new Promise((resolve, reject) => {
-                var params = { Bucket: params.Bucket, Key: params.CopySource };
                 this.s3client.deleteObject(params, function (err, data) {
                     if (err) {
                         result.error = err.message

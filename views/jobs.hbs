@@ -48,7 +48,7 @@
                 </div>
                 <div class="card-footer">
                     <span>Estado del Trabajo: ${job.status}</span>
-                    <a class=" ml-4 btn btn-${(job.isCompleted) ? 'success' : 'secondary'}" ${(job.isCompleted) ? `href="https://${job.Bucket}.s3.amazonaws.com/${job.Key}"` : `disabled`}>Descargar</a>
+                    <a class=" text-white ml-4 btn btn-${(job.isCompleted) ? 'success' : 'secondary'}" ${(job.isCompleted) ? `href="https://${job.Bucket}.s3.amazonaws.com/${job.Key}"` : `disabled`}>Descargar</a>
                 </div>
             </div>
       `
