@@ -36,6 +36,10 @@ class mongo_db {
     async get(query, Schema, options) {
         const { sort } = options || "-1"
         const { limit } = options || 1
+
+        console.log('sorting by: ', sort, options);
+        console.log(options);
+        
         try {
             let data = await Schema.find(query)
                 .sort(sort)
