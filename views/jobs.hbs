@@ -25,21 +25,21 @@
 </div>
 
 <script>
-
-    (async function load() {
-        const response = await fetch('/api/jobs')
-        const data = await response.json()
-        console.log(data)
-        const $jobContainer = document.querySelector('#jobContainer');
-        renderJobList(data, $jobContainer,)    
-
-    })()
+    var jobs = []
+        (async function load() {
+            const response = await fetch('/api/jobs')
+            const data = await response.json()
+            jobs = data
+            console.log(data)
+            const $jobContainer = document.querySelector('#jobContainer');
+            renderJobList(data, $jobContainer)
+        })()
 
     function template(job) {
 
         return (
             `
-            <div class="card mb-3">
+            <div class="card mb-3" id="${job._id}>
                 <div class="card-header">
                     <div class="card-title">${job.name}</div>
                 </div>
@@ -70,5 +70,15 @@
             $container.append(JobElement);
         })
     }
-
+    const verificador = setInterval(() => {
+        jobs = jobs.map((job) => {
+            if (job.status != 'COMPLETED') {
+                const response = await fetch('/api/jobs/' + job._id)
+                const data = await response.json()
+                console.log(data)
+                //const $jobContainer = document.querySelector('#jobContainer');
+                //renderJobList(data, $jobContainer)
+            }
+        })
+    }, 5000)
 </script>
