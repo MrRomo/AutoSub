@@ -25,21 +25,21 @@
 </div>
 
 <script>
-    var jobs = []
-        (async function load() {
-            const response = await fetch('/api/jobs')
-            const data = await response.json()
-            jobs = data
-            console.log(data)
-            const $jobContainer = document.querySelector('#jobContainer');
-            renderJobList(data, $jobContainer)
-        })()
+    (async function load() {
+        const response = await fetch('/api/jobs')
+        const data = await response.json()
+        jobs = data
+        console.log(data)
+        const $jobContainer = document.querySelector('#jobContainer');
+        renderJobList(data, $jobContainer)
+        verificador(data)
+    })()
 
     function template(job) {
 
         return (
             `
-            <div class="card mb-3" id="${job._id}>
+            <div class="card mb-3" id="${job._id}">
                 <div class="card-header">
                     <div class="card-title">${job.name}</div>
                 </div>
@@ -70,15 +70,19 @@
             $container.append(JobElement);
         })
     }
-    const verificador = setInterval(() => {
-        jobs = jobs.map((job) => {
-            if (job.status != 'COMPLETED') {
-                const response = await fetch('/api/jobs/' + job._id)
-                const data = await response.json()
-                console.log(data)
-                //const $jobContainer = document.querySelector('#jobContainer');
-                //renderJobList(data, $jobContainer)
+    function verificador(jobs) {
+        var jobs = jobs
+        console.log('entrando al interval')
+        setInterval(async () => {
+            if (jobs.length) {
+                jobs = jobs.forEach(async (job) => {
+                    console.log(job)
+                    console.log(job._id)
+                    return job
+                })
+            } else {
+                console.log('Todas completas')
             }
-        })
-    }, 5000)
+        }, 4000)
+    }
 </script>
