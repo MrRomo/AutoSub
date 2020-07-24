@@ -1,45 +1,45 @@
 <form action="/api/upload" method="POST" enctype="multipart/form-data">
-  <div class="form-group">
-    <label for="exampleFormControlFile1">Nombre del trabajo:</label>
-    <input type="text" class="form-control-file" name="name" required>
-  </div>
-  <div class="form-group">
-    <label for="exampleFormControlFile1">Sube un archivo:</label>
-    <input type="file" class="form-control-file" accept="video/mp4" name="file" required>
-  </div>
-  <div class="form-group">
-	<button type="submit" class="btn btn-success">Subir</button>
-  </div>
+	<div class="form-group">
+		<label for="exampleFormControlFile1">Nombre del trabajo:</label>
+		<input type="text" class="form-control-file" name="name" required>
+	</div>
+	<div class="form-group">
+		<label for="exampleFormControlFile1">Sube un archivo:</label>
+		<input type="file" class="form-control-file" accept="video/mp4" name="file" value="escoge un archivo" required>
+	</div>
+	<div class="form-group">
+		<button type="submit" class="btn btn-success" id="upFile">Subir</button>
+	</div>
 </form>
 
 <script>
-  $(document).on('change','input[type="file"]',function(){
-	// this.files[0].size recupera el tamaño del archivo
-	// alert(this.files[0].size);
-	
-	var fileName = this.files[0].name;
-	var fileSize = this.files[0].size;
+	const button = document.getElementById('upFile')
+	var vid = document.createElement('video');
+	var duration = 0
+	button.disabled = true
 
-	if(fileSize > 100000000){
-		alert('El archivo no debe superar los 100MB');
-		this.value = '';
-		this.files[0].name = '';
-	}else{
-		// recuperamos la extensión del archivo
-		var ext = fileName.split('.').pop();
-		
-		// Convertimos en minúscula porque 
-		// la extensión del archivo puede estar en mayúscula
-		ext = ext.toLowerCase();
-    
-		// console.log(ext);
-		switch (ext) {
-			case 'mp4': break;
-			default:
-				alert('El archivo no tiene la extensión adecuada');
-				this.value = ''; // reset del valor
-				this.files[0].name = '';
-		}
-	}
-});
+	$(document).on('change', 'input[type="file"]', function () {
+		var fileName = this.files[0].name;
+		var fileSize = this.files[0].size;
+		var fileURL = URL.createObjectURL(this.files[0]);
+		vid.src = fileURL;
+		var ext = fileName.split('.').pop().toLowerCase();
+		console.log(duration)
+		setTimeout(() => {
+			if ((fileSize > 100000000) || (ext != 'mp4') || (duration > 300)) {
+				button.classList.add("btn-secondary")
+				button.disabled = true
+				alert('El archivo debe ser .mp4, no debe superar los 100MB y los 5 minutos');
+			} else {
+				button.disabled = false
+			}
+		}, 500)
+	});
+
+	// wait for duration to change from NaN to the actual duration
+	vid.ondurationchange = function () {
+		duration = this.duration
+		console.log(duration)
+	};
+
 </script>

@@ -32,6 +32,8 @@ crtl.getJobs = async (req, res) => {
 
     const { id } = req.user
 
+    const { query } = req
+
     const jobs = await db.get({ 'userId': id }, Job, { 'limit': 10, 'sort': { 'createdAt': -1 } })
 
     const { data } = jobs
@@ -67,10 +69,6 @@ crtl.getJobs = async (req, res) => {
             }
         }
     });
-
-
-    console.log(jobs);
-
     res.json(jobs.data)
 
 }
@@ -111,11 +109,16 @@ crtl.getJob = async (req, res) => {
             uploader.deleteFileS3({ Bucket, Key: `${Bucket}/${job.jobName}.json` })
             await db.update(query, Job)
         }
+        
     }
 
-    console.log(job);
 
     res.json(job)
 }
 
+
+checkJobs = async (jobs) =>{
+
+
+}
 module.exports = crtl

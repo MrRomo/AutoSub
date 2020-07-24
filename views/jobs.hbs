@@ -27,12 +27,13 @@
 <script>
     (async function load() {
         const response = await fetch('/api/jobs')
-        const data = await response.json()
-        jobs = data
-        console.log(data)
+        let jobs = await response.json()
+        console.log(jobs)
         const $jobContainer = document.querySelector('#jobContainer');
-        renderJobList(data, $jobContainer)
-        verificador(data)
+        renderJobList(jobs, $jobContainer)
+        //while (jobs.length) {
+          //  jobs = jobs.filter(job => job.status == 'IN_PROGRESS')
+        //}
     })()
 
     function template(job) {
@@ -54,6 +55,7 @@
       `
         )
     }
+
     function createTemplate(HTMLString) {
         const html = document.implementation.createHTMLDocument();
         html.body.innerHTML = HTMLString;
@@ -70,19 +72,18 @@
             $container.append(JobElement);
         })
     }
+
     function verificador(jobs) {
         var jobs = jobs
         console.log('entrando al interval')
         setInterval(async () => {
+            console.log(jobs)
             if (jobs.length) {
-                jobs = jobs.forEach(async (job) => {
-                    console.log(job)
-                    console.log(job._id)
-                    return job
-                })
             } else {
                 console.log('Todas completas')
+                clearInterval()
             }
         }, 4000)
     }
+     
 </script>
