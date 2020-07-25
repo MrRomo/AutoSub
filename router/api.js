@@ -9,5 +9,6 @@ const { isLoggedIn, isNotLoggedIn } = require('../lib/auth')
     /* GET home page. */
 router.post('/upload', isLoggedIn, multerUploader.single('file'), job.processVideo)
 router.get('/jobs', isLoggedIn, job.getJobs)
+router.post('/jobs', isLoggedIn, job.getJobs)
 
 module.exports = router;

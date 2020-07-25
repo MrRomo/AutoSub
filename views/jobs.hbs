@@ -25,22 +25,49 @@
 </div>
 
 <script>
+    function sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
     (async function load() {
         const response = await fetch('/api/jobs')
         let jobs = await response.json()
-        console.log(jobs)
         const $jobContainer = document.querySelector('#jobContainer');
         renderJobList(jobs, $jobContainer)
-        //while (jobs.length) {
-          //  jobs = jobs.filter(job => job.status == 'IN_PROGRESS')
-        //}
+        const newJobs = await verificador(jobs)
+        while ($jobContainer.hasChildNodes()) {
+            $jobContainer.removeChild($jobContainer.firstChild);
+        }
+        renderJobList(newJobs, $jobContainer)
     })()
 
-    function template(job) {
 
-        return (
-            `
-            <div class="card mb-3" id="${job._id}">
+    async function verificador(jobs) {
+        jobs = jobs.filter(job => job.status == 'IN_PROGRESS')
+        while (jobs.length) {
+            jobsId = jobs.map(job => job._id)
+            console.log(jobs.length)
+            await fetch('/api/jobs', {
+                method: 'POST', // or 'PUT'
+                body: JSON.stringify({ '_id': jobsId }), // data can be `string` or {object}!
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }).then(res => res.json())
+                .catch(error => console.error('Error:', error))
+                .then(response => {
+                    jobs = response
+                    console.log('Success:', response)
+                })
+            jobs = jobs.filter(job => job.status == 'IN_PROGRESS')
+            await sleep(4000)
+        }
+        const response = await fetch('/api/jobs')
+        return await response.json()
+    }
+
+    function template(job) {
+        return (`<div class="card mb-3" id="${job._id}">
                 <div class="card-header">
                     <div class="card-title">${job.name}</div>
                 </div>
@@ -48,12 +75,18 @@
                     <h4>Codigo del trabajo: ${job.jobName}</h4>
                 </div>
                 <div class="card-footer">
-                    <span>Estado del Trabajo: ${job.status}</span>
-                    <a class=" text-white ml-4 btn btn-${(job.isCompleted) ? 'success' : 'secondary'}" ${(job.isCompleted) ? `href="https://${job.Bucket}.s3.amazonaws.com/${job.Key}"` : `disabled`}>Descargar</a>
+                    <div class="starRating">
+                        <span>Estado del Trabajo: ${job.status}</span>
+                        <a class=" text-white ml-4 btn btn-${(job.isCompleted) ? 'success' : 'secondary'}" ${(job.isCompleted) ? `href="https://${job.Bucket}.s3.amazonaws.com/${job.Key}"` : `disabled`}>Descargar</a>
+                        ${(job.isCompleted) ? '' : '<div class="spinner-border text-success" role="status"><span class="sr-only">Loading...</span></div>'}    
+                        <div>
+                            <span>Calificación</span>
+                            ${'<span class="fa fa-star checked"></span>'.repeat(job.stars)}
+                            ${'<span class="fa fa-star"></span>'.repeat(5 - job.stars)}
+                        </div>
+                    </div>
                 </div>
-            </div>
-      `
-        )
+            </div>`)
     }
 
     function createTemplate(HTMLString) {
@@ -63,27 +96,11 @@
     }
 
     function renderJobList(list, $container) {
-        // actionList.data.Jobs
-        //$container.children[0].remove();
         list.forEach((Job) => {
-            console.log(Job)
             const HTMLString = template(Job);
             const JobElement = createTemplate(HTMLString);
             $container.append(JobElement);
         })
     }
-
-    function verificador(jobs) {
-        var jobs = jobs
-        console.log('entrando al interval')
-        setInterval(async () => {
-            console.log(jobs)
-            if (jobs.length) {
-            } else {
-                console.log('Todas completas')
-                clearInterval()
-            }
-        }, 4000)
-    }
-     
+    
 </script>
