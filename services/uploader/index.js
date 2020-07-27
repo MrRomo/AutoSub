@@ -105,7 +105,6 @@ class uploader_s3 {
                     else {
                         result.result = `File deleted successfully. ${data}`
                         resolve(result)
-                        console.log(data);
                     }  // deleted
                 });
             })
@@ -129,7 +128,6 @@ class uploader_s3 {
                     else {
                         result.result = `File moved successfully. ${data}`
                         resolve(result)
-                        console.log(data); // successful response
                     }
                 });
             })
@@ -143,8 +141,6 @@ class uploader_s3 {
         try {
             const res = await new Promise((resolve, reject) => {
                 var params = { Bucket, Key };
-                console.log(params);
-
                 this.s3client.getObject(params, async (err, data) => {
                     if (err) {
                         result.error = err.message

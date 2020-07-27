@@ -1,20 +1,20 @@
 const uploader_s3 = require('../../services/uploader').uploader_s3
 const uploader = new uploader_s3(process.env)
-const { User, Job, File } = require('../../models')
-const { startJob, getJob, aws2str } = require('../../services/video_process/aws_trascript')
+const { Job } = require('../../models')
+const { getJob, aws2str } = require('../../services/video_process/aws_trascript')
 
 
 class JobService {
 
     constructor(query) {
-        this.query
+        this.query = query
     }
 
     async init() {
         const { Bucket } = process.env
-        const result = await db.get(this.query, Job, { 'limit': 1, 'sort': { 'createdAt': -1 } })
+        console.log('Consulta query', this.query);
+        const result = await db.get(this.query, Job)
         this.job = result.data[0]
-        console.log(this.job);
         this.params = {
             Bucket, /* Another bucket working fine */
             CopySource: `${Bucket}/${this.job.jobName}.json`, /* required */
@@ -43,14 +43,10 @@ class JobService {
                 }
                 await uploader.deleteFileS3({ Bucket, Key: `${Bucket}/${this.job.jobName}.json` })
                 const { data } = await db.update(query, Job)
-                console.log('data jobs', data);
                 this.job = data[0]
             }
         }
     }
-
-
-
 }
 
 module.exports = JobService

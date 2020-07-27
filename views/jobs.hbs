@@ -38,12 +38,16 @@
         while ($jobContainer.hasChildNodes()) {
             $jobContainer.removeChild($jobContainer.firstChild);
         }
+        console.log('Pintando nuevos jobs')
+        console.log(jobs)
         renderJobList(newJobs, $jobContainer)
     })()
 
 
     async function verificador(jobs) {
+        console.log(jobs)
         jobs = jobs.filter(job => job.status == 'IN_PROGRESS')
+        console.log(jobs)
         while (jobs.length) {
             jobsId = jobs.map(job => job._id)
             console.log(jobs.length)
@@ -53,17 +57,18 @@
                 headers: {
                     'Content-Type': 'application/json'
                 }
-            }).then(res => res.json())
-                .catch(error => console.error('Error:', error))
-                .then(response => {
-                    jobs = response
-                    console.log('Success:', response)
-                })
+            }).then(async res => {
+                jobs = await res.json()
+                console.log('Success:', jobs)
+            })
+
             jobs = jobs.filter(job => job.status == 'IN_PROGRESS')
+            if(!jobs.length) break
             await sleep(4000)
         }
         const response = await fetch('/api/jobs')
-        return await response.json()
+        jobs = await response.json()
+        return jobs
     }
 
     function template(job) {
@@ -102,5 +107,5 @@
             $container.append(JobElement);
         })
     }
-    
+
 </script>
