@@ -7,6 +7,8 @@ const jobsUtils = require('../utils/job')
 const { User, Job, File } = require('../models')
 const fs = require('fs');
 
+const { JobService } = require('./../services/jobs')
+
 crtl.processVideo = async (req, res) => {
     console.log('Processing video¡¡');
     const { user } = req
@@ -31,57 +33,33 @@ crtl.processVideo = async (req, res) => {
 crtl.getJobs = async (req, res) => {
     const { id } = req.user
 
-    const { body } = req
-    console.log(body);
-    let jobs
-    if (!Object.keys(body).keys.length) {
-        jobs = await db.get({ 'userId': id }, Job, { 'limit': 2, 'sort': { 'createdAt': -1 } })
-    } else {
-        jobs = await db.get({ query }, Job, { 'limit': 2, 'sort': { 'createdAt': -1 } })
-    }
+    jobs = await db.get({ 'userId': id }, Job, { 'limit': 10, 'sort': { 'createdAt': -1 } })
 
-    jobs = jobs.data
-
-    let jobsChecked = []
-    await jobs.forEach(async job => {
-        jobCheck = await checkJob(job)
-        jobsChecked.push(jobCheck)
-    })
-
-    res.json(jobs)
+    res.json(jobs.data)
 }
 
 
-checkJob = async (job) => {
-    let { Bucket } = process.env
-    if (!job.isCompleted) {
-        console.log('job not complete');
-        const result = await getJob(job.jobName)
-        const { TranscriptionJobStatus } = result.TranscriptionJob
-        if (TranscriptionJobStatus != job.status) {
-            var params = {
-                Bucket, /* Another bucket working fine */
-                CopySource: `${Bucket}/${job.jobName}.json`, /* required */
-                Key: `AutoSub/${job.userId}/${job.jobName}/${job.jobName}.json`, /* required */
-                ACL: 'public-read',
-            }
-            await uploader.move(params)
-            await aws2str(job)
-            const query = {
-                query: { 'jobName': job.jobName },
-                options: {
-                    'status': TranscriptionJobStatus,
-                    'isCompleted': true,
-                    'Bucket': Bucket,
-                    'Key': `AutoSub/${job.userId}/${job.jobName}/${job.jobName}.srt`
-                }
-            }
-            await uploader.deleteFileS3({ Bucket, Key: `${Bucket}/${job.jobName}.json` })
-            const { data } = await db.update(query, Job)
-            job = data
-        }
-    }
-    return job
+crtl.updateState = async (req, res) => {
+
+    const jobsId = req.body._id
+    const query = req.body
+
+    const jobs = []
+
+
+    await Promise.all(jobsId.map(async (id) => {
+        console.log('start foreach');
+        const job = new JobService(query)
+        await job.init()
+        await job.check()
+        jobs.push(job.job)
+        return job.job
+    }));
+
+    console.log('jobs', jobs)
+    console.log('jobsID', jobsId)
+
+    res.json(jobs)
 }
 
 module.exports = crtl
