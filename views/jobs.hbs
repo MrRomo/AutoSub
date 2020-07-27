@@ -38,19 +38,14 @@
         while ($jobContainer.hasChildNodes()) {
             $jobContainer.removeChild($jobContainer.firstChild);
         }
-        console.log('Pintando nuevos jobs')
-        console.log(jobs)
         renderJobList(newJobs, $jobContainer)
     })()
 
 
     async function verificador(jobs) {
-        console.log(jobs)
         jobs = jobs.filter(job => job.status == 'IN_PROGRESS')
-        console.log(jobs)
         while (jobs.length) {
             jobsId = jobs.map(job => job._id)
-            console.log(jobs.length)
             await fetch('/api/jobs', {
                 method: 'POST', // or 'PUT'
                 body: JSON.stringify({ '_id': jobsId }), // data can be `string` or {object}!
@@ -59,7 +54,6 @@
                 }
             }).then(async res => {
                 jobs = await res.json()
-                console.log('Success:', jobs)
             })
 
             jobs = jobs.filter(job => job.status == 'IN_PROGRESS')
