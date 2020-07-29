@@ -3,7 +3,9 @@
 <div class="container mt-4">
     <div class="card">
         <div class="card-header">
-            <div class="card-title">Sube un video</div>
+            <div class="card-title">
+                <h2>Sube un video</h2>
+            </div>
         </div>
         <div class="card-body">
             {{#if user}}
@@ -25,6 +27,7 @@
 </div>
 
 <script>
+    var $rating = document.querySelectorAll('.rating')
     function sleep(ms) {
         return new Promise(resolve => setTimeout(resolve, ms));
     }
@@ -34,13 +37,38 @@
         let jobs = await response.json()
         const $jobContainer = document.querySelector('#jobContainer');
         renderJobList(jobs, $jobContainer)
+        $rating = document.querySelectorAll('.rating')
         const newJobs = await verificador(jobs)
         while ($jobContainer.hasChildNodes()) {
             $jobContainer.removeChild($jobContainer.firstChild);
         }
         renderJobList(newJobs, $jobContainer)
+        $rating = document.querySelectorAll('.rating')
+        $rating.forEach(e => {
+            e.addEventListener('click', async (e) => {
+                const { value } = e.target.attributes.value
+                const { id } = e.target.dataset
+                await fetch('/api/jobs/rating', {
+                    method: 'POST', // or 'PUT'
+                    body: JSON.stringify({ id, value }), // data can be `string` or {object}!
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                }).then(async res => {
+                    const job = await res.json()
+                    const $ratingContainer = document.querySelectorAll(`.ratingContainner [data-id="${job[0]._id}"]`)
+                    for (var i = 0; i < 5; i++) {
+                        
+                        (i<job[0].stars) ?  $ratingContainer[i].classList.add('checked'): $ratingContainer[i].classList.remove('checked') 
+                        //$ratingContainer.forEach(e => (i>job[0].stars) ? e.classList.add('checked') : e.classList.remove('checked'))
+                    }
+                })
+            })
+        })
     })()
 
+
+    
 
     async function verificador(jobs) {
         jobs = jobs.filter(job => job.status == 'IN_PROGRESS')
@@ -57,7 +85,7 @@
             })
 
             jobs = jobs.filter(job => job.status == 'IN_PROGRESS')
-            if(!jobs.length) break
+            if (!jobs.length) break
             await sleep(4000)
         }
         const response = await fetch('/api/jobs')
@@ -66,6 +94,12 @@
     }
 
     function template(job) {
+
+        let stars = ''
+        for (let i = 1; i <= 5; i++) {
+            stars += `<span class="fa fa-star rating ${(job.stars >= i) ? 'checked' : ''}" value=${i} data-toggle="tooltip" data-id = '${job._id}' data-placement="top" title='calificar con ${i} estrella'></span>`
+        }
+
         return (`<div class="card mb-3" id="${job._id}">
                 <div class="card-header">
                     <div class="card-title">${job.name}</div>
@@ -74,15 +108,16 @@
                     <h4>Codigo del trabajo: ${job.jobName}</h4>
                 </div>
                 <div class="card-footer">
-                    <div class="starRating">
+                    <div class="starRating d-flex" style = "align-items: center; justify-content: space-around;">
                         <span>Estado del Trabajo: ${job.status}</span>
-                        <a class=" text-white ml-4 btn btn-${(job.isCompleted) ? 'success' : 'secondary'}" ${(job.isCompleted) ? `href="https://${job.Bucket}.s3.amazonaws.com/${job.Key}"` : `disabled`}>Descargar</a>
-                        ${(job.isCompleted) ? '' : '<div class="spinner-border text-success" role="status"><span class="sr-only">Loading...</span></div>'}    
                         <div>
-                            <span>Calificación</span>
-                            ${'<span class="fa fa-star checked"></span>'.repeat(job.stars)}
-                            ${'<span class="fa fa-star"></span>'.repeat(5 - job.stars)}
+                            <span class='d-inline'>Calificación: </span>
+                            <div class='d-inline ratingContainner' data-id = "${job._id}">
+                                ${stars}
+                            </div>
                         </div>
+                        <a class=" text-white btn btn-${(job.isCompleted) ? 'success' : 'secondary'}" ${(job.isCompleted) ? `href="https://${job.Bucket}.s3.amazonaws.com/${job.Key}"` : `disabled`}>Descargar</a>
+                        ${(job.isCompleted) ? '' : '<div class="spinner-border text-success" role="status"><span class="sr-only">Loading...</span></div>'}    
                     </div>
                 </div>
             </div>`)

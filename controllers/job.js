@@ -2,9 +2,9 @@ const crtl = {}
 const { prepareFile } = require('../utils/files')
 const uploader_s3 = require('../services/uploader').uploader_s3
 const uploader = new uploader_s3(process.env)
-const { startJob} = require('../services/video_process/aws_trascript')
+const { startJob } = require('../services/video_process/aws_trascript')
 const jobsUtils = require('../utils/job')
-const { Job} = require('../models')
+const { Job } = require('../models')
 
 const { JobService } = require('./../services/jobs')
 
@@ -16,7 +16,7 @@ crtl.processVideo = async (req, res) => {
     try {
 
         const { database } = await uploader.upload(data, params, false)
-        const { Key} = database
+        const { Key } = database
         await startJob(Key, database.jobName)
 
         await jobsUtils.save(req.user, database, name)
@@ -42,7 +42,7 @@ crtl.updateState = async (req, res) => {
     const jobs = []
 
     await Promise.all(jobsId.map(async (id) => {
-        const job = new JobService({'_id':id})
+        const job = new JobService({ '_id': id })
         await job.init()
         await job.check()
         jobs.push(job.job)
@@ -51,8 +51,18 @@ crtl.updateState = async (req, res) => {
 
     console.log(jobsId);
     console.log(jobs);
-    
+
     res.json(jobs)
+}
+
+crtl.updateRating = async (req, res) => {
+
+    const query = { query: { '_id': req.body.id }, options: { stars: req.body.value } }
+    
+    const { data } = await db.update(query, Job)
+
+    console.log(data);
+    res.json(data)
 }
 
 module.exports = crtl

@@ -77,3 +77,4 @@ app.listen(port, () => {
   console.log('Server on port: ', port, "http://localhost:"+port);
   console.log("Enviroment: ", app.get('env'));
 })
+
