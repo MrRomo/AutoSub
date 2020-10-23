@@ -117,7 +117,7 @@
                             </div>
                         </div>
                         <a class=" text-white btn btn-${(job.isCompleted) ? 'success' : 'secondary'}" ${(job.isCompleted) ? `href="https://${job.Bucket}.s3.amazonaws.com/${job.Key}"` : `disabled`}>Descargar .srt</a>
-                        <a class=" text-white btn btn-${(job.isCompleted) ? 'success' : 'secondary'}" ${(job.isCompleted) ? `href="https://${job.Bucket}.s3.amazonaws.com/${job.userId}/${job.jobName}/${job.jobName}.json"` : `disabled`}>Descargar .json</a>
+                        <a class=" text-white btn btn-${(job.isCompleted) ? 'success' : 'secondary'}" ${(job.isCompleted) ? `href="https://${job.Bucket}.s3.amazonaws.com/AutoSub/${job.userId}/${job.jobName}/${job.jobName}.json"` : `disabled`}>Descargar .json</a>
                         ${(job.isCompleted) ? '' : '<div class="spinner-border text-success" role="status"><span class="sr-only">Loading...</span></div>'}    
                     </div>
                 </div>
