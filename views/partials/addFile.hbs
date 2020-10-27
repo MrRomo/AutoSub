@@ -26,10 +26,10 @@
 		var ext = fileName.split('.').pop().toLowerCase();
 		console.log(duration)
 		setTimeout(() => {
-			if ((fileSize > 100000000) || (ext != 'mp4') || (duration > 2700)) {
+			if ((fileSize > 100000000) || (ext != 'mp4') || (duration > 300)) {
 				button.classList.add("btn-secondary")
 				button.disabled = true
-				alert('El archivo debe ser .mp4, no debe superar los 100MB y los 45 minutos');
+				alert('El archivo debe ser .mp4, no debe superar los 100MB y los 5 minutos');
 			} else {
 				button.disabled = false
 			}
